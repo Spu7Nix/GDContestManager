@@ -1,2 +1,2 @@
 
-JOIN THE [SERVER](http://www.dropwizard.io/1.0.2/docs/)
+JOIN THE [SERVER](https://discord.gg/dumbFED)
