@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Novice",
+    "req": 1
+  },
+  {
+    "name": "Amateur",
+    "req": 5
+  },
+  {
+    "name": "Apprentice",
+    "req": 10
+  },
+  {
+    "name": "Adapted",
+    "req": 20
+  },
+  {
+    "name": "Competent",
+    "req": 35
+  },
+  {
+    "name": "Skilled",
+    "req": 60
+  },
+  {
+    "name": "Talented",
+    "req": 100
+  },
+  {
+    "name": "Professional",
+    "req": 150
+  },
+  {
+    "name": "Master",
+    "req": 200
+  },
+  {
+    "name": "Expert",
+    "req": 300
+  },
+  {
+    "name": "Legend",
+    "req": 500
+  },
+  {
+    "name": "Demigod",
+    "req": 700
+  },
+  {
+    "name": "God",
+    "req": 1000
+  }
+]

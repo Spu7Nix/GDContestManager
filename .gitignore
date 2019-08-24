@@ -1,0 +1,5 @@
+node_modules/
+backups/
+contests.json
+data.json
+token.txt
