@@ -58,11 +58,11 @@ module.exports = {
                         }
                     ]
                     let cp = 0
-                    const sendDescriptor = async() => {
+                    const sendDescriptor = async () => {
                         let p = properties[cp]
                         const embed = new RichEmbed().setTitle(`**Please send your contest's ${p.name}!**`)
-                                                   .setDescription(p.desc)
-                                                   .setColor('#74fcab')
+                            .setDescription(p.desc)
+                            .setColor('#74fcab')
                         await message.channel.send(embed)
                         if (p.optional) {
                             message.channel.send(`Type \`\`skip\`\` if you don't want to add this.`)
@@ -210,6 +210,32 @@ module.exports = {
                 fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
                     message.channel.send("Idea deleted.")
                 })
+
+                break
+
+            case 'apply':
+                (async () => {
+                    const allIdeas = JSON.parse(fs.readFileSync('data.json')).ideas
+
+
+                    if (words.length < 3) {
+                        message.channel.send('Include IdeaID')
+                        return
+                    }
+
+                    if (!allIdeas.hasOwnProperty(words[2])) {
+                        message.channel.send(`There is no idea with ID "${words[2]}"`)
+                        return
+                    }
+                    let i = allIdeas[words[2]]
+                    let author = await client.fetchUser(i.author)
+
+                    let command = `!new ${i.name.toLowerCase().replace(' ', '-')} (${i.description + ` (idea by ${author.username})`}) (${i.criteria}) `
+                    if (i.hasOwnProperty('example image')) command += i['example image']
+
+                    message.channel.send(`\`\`\`${command}\`\`\``)
+
+                })()
 
                 break
 

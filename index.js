@@ -8,7 +8,8 @@ const fs = require('fs')
 
 
 const client = new Client();
-const token = fs.readFileSync('token.txt')
+const token = fs.readFileSync('token.txt').toString()
+
 
 //user ids of all managers
 global.ownerID = ['197820335377219584', '205782690912272385']
