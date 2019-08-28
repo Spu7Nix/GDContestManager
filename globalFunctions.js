@@ -57,11 +57,14 @@ module.exports = {
         let member = global.gdmc.members.find(m => m.user == author)
 
         for (let rank of global.ranks) {
+            let test
             try {
-                let test = member.roles.find(role => role === rank.role)
+                test = member.roles.find(role => role === rank.role)
             } catch (err) {
                 author.send('Hey! It seems like the server isn\'t recognising you as a member. To fix this, please leave and rejoin the server. You will not lose any points. Thanks for understanding :)')
+                return
             }
+            test = member.roles.find(role => role === rank.role)
             if (test) {
                 mRank = rank
                 break
