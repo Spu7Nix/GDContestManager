@@ -27,6 +27,10 @@ module.exports = {
 
         const send = async function(cntst){
           let startingMessage = await message.channel.send("Calculating, this might take a while...")
+
+          if (contests[words[2]].channel == '0') {
+            message.channel.send('This contest is being judged right now. Wait for the results!')
+          }
           let top = await getTopEntries(contests[words[2]], parseInt(words[1]), client)
           var amount = Math.min(parseInt(words[1]), Object.values(contests[words[2]].entries).length)
 

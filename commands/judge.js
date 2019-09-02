@@ -28,8 +28,9 @@ module.exports = {
     }
 
     contests[c].open = false
+    contests[c].channel = '0'
     for(let i = 0; i < data.entryChannels.length; i++){
-      if(data.entryChannels[i].id == contests[c].channel){
+      if (data.entryChannels[i].id == contests[c].channel){
         data.entryChannels[i].occupied = false
         break
       }

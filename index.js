@@ -224,12 +224,8 @@ const updateFunc = async function () {
   for (let contest of contests_) {
     let channel = await client.channels.get(contest.channel)
     if ( channel ){
-      if (contest.open && channel.name != contest.name + '-entries') {
-        channel.setName(contest.name + '-entries')
-        channelsOpen.push(channel.id)
-      } else if (!contest.open && !channelsOpen.includes(channel.id)) {
-  
-        channel.setName('_')
+      if (contest.open) {
+        
       }
     }
 
