@@ -27,10 +27,10 @@ module.exports = {
       return
     }
 
-    contests[c].open = false
-    contests[c].channel = '0'
-    for(let i = 0; i < data.entryChannels.length; i++){
-      if (data.entryChannels[i].id == contests[c].channel){
+
+
+    for (let i = 0; i < data.entryChannels.length; i++) {
+      if (data.entryChannels[i].id == contests[c].channel) {
         data.entryChannels[i].occupied = false
         break
       }
@@ -40,7 +40,9 @@ module.exports = {
     })
 
     client.channels.get(contests[c].channel).send("**\"" + c + "\" is now closed. Results coming soon.**")
+    contests[c].open = false
     
+
 
     //send messages in judging channels
     let amount
@@ -94,7 +96,12 @@ module.exports = {
       }
 
     }
-    send()
+    send().then(() => {
+      contests[c].channel = '0'
+      fs.writeFile('contests.json', JSON.stringify(contests, null, 2), (err) => {
+        //nothing
+      })
+    })
 
 
 

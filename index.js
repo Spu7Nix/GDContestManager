@@ -90,9 +90,9 @@ client.on('message', message => {
 
   let words = tokenize(content)
 
-  if (message.attachments.size > 0){
+  if (message.attachments.size > 0) {
     const attachments = message.attachments.array()
-    for (a of attachments){
+    for (a of attachments) {
       words.push(a.url)
     }
   }
@@ -186,6 +186,7 @@ const updateFunc = async function () {
   //check timers
   let contests = Object.entries(JSON.parse(fs.readFileSync('contests.json')))
 
+
   for (const c of contests) {
     if (!c[1].hasOwnProperty('deadline')) continue
 
@@ -201,12 +202,45 @@ const updateFunc = async function () {
       } catch (error) {
         console.log(error)
       }
-      
+
       console.log('ended contest: ' + c[0])
     }
 
   }
 
+  // back up
+
+  let data_ = fs.readFileSync('data.json')
+  let contests_ = fs.readFileSync('contests.json')
+
+
+  //change entrychannel names
+  let channels = JSON.parse(fs.readFileSync('data.json')).entryChannels
+  contests_ = Object.values(JSON.parse(contests_))
+  channels.forEach((channel) => {
+    if (channel.occupied) {
+
+
+      for (contest of contests_) {
+        if (contest.channel == channel.id && contest.open) {
+          gdmc.channels.find(c => c.id === channel.id).setName(`${contest.name}-entries`)
+          break
+        }
+      }
+    } else {
+
+      gdmc.channels.find(c => c.id === channel.id).setName(`_`)
+
+
+    }
+  })
+
+
+}
+
+setInterval(updateFunc, 60000);
+
+setInterval(() => {
   // back up
 
   let data_ = fs.readFileSync('data.json')
@@ -217,21 +251,4 @@ const updateFunc = async function () {
   fs.writeFile('./backups/contests-backup.json', contests_, (err) => {
     if (err) console.log(err)
   })
-
-  //change entrychannel names
-  contests_ = Object.values(JSON.parse(contests_))
-  let channelsOpen = []
-  for (let contest of contests_) {
-    let channel = await client.channels.get(contest.channel)
-    if ( channel ){
-      if (contest.open) {
-        
-      }
-    }
-
-    
-  }
-
-}
-
-setInterval(updateFunc, 60000);
+}, 1200000); //20 min

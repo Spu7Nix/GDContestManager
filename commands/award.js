@@ -16,7 +16,7 @@ module.exports = {
   name: ['award'],
   type: 'manager',
   help: '``!award [usertag] [amount]`` gives or takes points from a user',
-  execute(client, message, words) {
+  execute: async function(client, message, words) {
     let points = parseInt(words[2])
     if (!points) {
       points = parseInt(words[3])
@@ -31,7 +31,7 @@ module.exports = {
       if (member) {
         user = (member.user)
       } else {
-        let member2 = gdmc.members.find(m => m.user.id == words[1])
+        let member2 = await client.fetchUser(words[1])
         if (member2) {user = (member2.user)} else {
           message.channel.send(`There is no member with id "${words[1]}"`)
           return
