@@ -24,14 +24,14 @@ module.exports = {
 
         console.log(words)
 
-        for (var i = 0; i < data.entryChannels.length; i++) { 
+        for (var i = 0; i < data.entryChannels.length; i++) {
             if (!data.entryChannels[i].occupied) {
                 entryChannel = data.entryChannels[i].id
                 ecn = i
                 break
             }
         }
-        
+
 
         if (entryChannel == 'none' || ecn == -1) {
             message.channel.send("All entrychannels are occupied right now right now!");
@@ -101,8 +101,11 @@ module.exports = {
         }
         const send = async function () {
             const notirole = await global.gdmc.roles.find(role => role.name === "notification")
-            await client.channels.get(contestsChannel).send(`${notirole}`);
-            client.channels.get(contestsChannel).send(embed);
+            await notirole.edit({ mentionable: true }, "Temporarily enable mentionability to ping subscribed users");
+            let ch = client.channels.get(contestsChannel);
+            await ch.send(`${notirole}`);
+            ch.send(embed);
+            notirole.edit({ mentionable: false }, "Disable mentionability because fuck raiders");
         }
         send()
         client.channels.get(entryChannel).send("**Entries for the new contest \"" + name + "\" will appear here!**");
