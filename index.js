@@ -20,7 +20,8 @@ global.ratings = ["\u0031\u20E3", "\u0032\u20E3", "\u0033\u20E3", "\u0034\u20E3"
 //command system
 client.commands = new discord.Collection()
 global.commandList = []
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);

@@ -97,7 +97,7 @@ module.exports = {
 
     }
     send().then(() => {
-      contests[c].channel = '0'
+      
       fs.writeFile('contests.json', JSON.stringify(contests, null, 2), (err) => {
         //nothing
       })

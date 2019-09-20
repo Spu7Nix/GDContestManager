@@ -101,8 +101,15 @@ module.exports = {
         }
         const send = async function () {
             const notirole = await global.gdmc.roles.find(role => role.name === "notification")
-            await client.channels.get(contestsChannel).send(`${notirole}`);
-            client.channels.get(contestsChannel).send(embed);
+
+
+            await notirole.edit({ mentionable: true }, "Temporarily enable mentionability to ping subscribed users");
+            let ch = client.channels.get(contestsChannel);
+            await ch.send(`${notirole}`);
+            ch.send(embed);
+            notirole.edit({ mentionable: false }, "Disable mentionability because fuck raiders");
+
+            
         }
         send()
         client.channels.get(entryChannel).send("**Entries for the new contest \"" + name + "\" will appear here!**");
