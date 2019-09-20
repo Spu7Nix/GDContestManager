@@ -70,7 +70,7 @@ module.exports = {
                 'image': image
             },
             'entries': {},
-            'top5': {},
+            'top5': [],
             'open': true,
             'criteria': criteria
         }

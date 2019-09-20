@@ -68,14 +68,10 @@ module.exports = {
       })
 
       for (let i = 0; i < 5; i++) {
-        contests[c].top5.push(se[i])
+        contests[c].top5.push(se[i].author)
       }
 
-      fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
-          if (err) {
-              console.log('problem with writing data file')
-          }
-      })
+      
 
       fs.writeFile('results_' + c + '.json', JSON.stringify({
         'name': contests[c].name,
@@ -88,12 +84,10 @@ module.exports = {
         files: ['./results_' + c + '.json']
       })
       fs.unlink('./results_' + c + '.json', (err) => {});
-      contests = JSON.parse(fs.readFileSync('contests.json'))
-      //end contest
-      //contests[c] = null
-      //delete contests[c]
+      
+      
       fs.writeFile('contests.json', JSON.stringify(contests, null, 2), (err) => {
-        //console.log(contests)
+        
       })
     }
     rest()

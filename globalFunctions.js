@@ -51,7 +51,7 @@ module.exports = {
         
         return (Math.floor((rating / ratingsObj.length) * 100) / 100)
     },
-    givePoints: function (author, amount, client) {
+    givePoints: async function (author, amount, client) {
         let data = JSON.parse(fs.readFileSync('data.json'))
         let mRank
         let member = global.gdmc.members.find(m => m.user == author)
@@ -119,9 +119,8 @@ module.exports = {
                 break
             }
         }
-        fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
-            module.exports.updateLeaderboard(client)
-        })
+        fs.writeFileSync('data.json', JSON.stringify(data, null, 2))
+        module.exports.updateLeaderboard(client)
     },
     getTopEntries: async function (cont, am, client) {
         let amount = Math.min(am, Object.values(cont.entries).length)
