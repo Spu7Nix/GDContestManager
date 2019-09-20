@@ -14,7 +14,7 @@ const token = fs.readFileSync('token.txt').toString()
 //user ids of all managers
 global.ownerID = ['197820335377219584', '205782690912272385']
 
-//rating emojies (1, 2, 3, 4 , 5)
+//rating emojies (1, 2, 3, 4, 5)
 global.ratings = ["\u0031\u20E3", "\u0032\u20E3", "\u0033\u20E3", "\u0034\u20E3", "\u0035\u20E3"]
 
 //command system

@@ -41,7 +41,7 @@ module.exports = {
 
     const calculate = async function (judging) {
       if (judging == null) {
-        
+
         return
       }
       let j = judging
@@ -65,6 +65,16 @@ module.exports = {
       }
       await se.sort((a, b) => {
         return arrAvg(Object.values(b.messages)) - arrAvg(Object.values(a.messages))
+      })
+
+      for (let i = 0; i < 5; i++) {
+        contests[c].top5.push(se[i])
+      }
+
+      fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
+          if (err) {
+              console.log('problem with writing data file')
+          }
       })
 
       fs.writeFile('results_' + c + '.json', JSON.stringify({
