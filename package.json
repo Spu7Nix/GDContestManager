@@ -12,6 +12,6 @@
     "discord.js": "^11.4.2",
     "dotenv": "^7.0.0",
     "is-image-url": "^1.1.8",
-    "validator": "^11.0.0"
+    "validator": "^13.7.0"
   }
 }
